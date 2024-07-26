@@ -1,0 +1,79 @@
+txt for store performance
+
+We are importing:-
+
+NumPy (NumPy): For numerical operations and handling missing values.
+Pandas (pandas): For data manipulation and analysis.
+Stream lit (stream lit): For creating an interactive web application.
+Matplotlib (matplotlib.pyplot): For creating various plots and visualizations.
+
+
+
+in the try block we write or risky code which can generate error
+
+Exception Handling: 
+Catches FileNotFoundError and displays an error message if the file is not found.
+Catches pd.errors.EmptyDataError and displays an error message if the file is empty.
+Catches pd.errors.ParserError and displays an error message if there is an error parsing the file.
+Catches any other exceptions and displays an error message with details
+
+df = pd.read_csv('storeperformance.csv')
+this line reads the csv file
+
+st.title('EDA of Store Analysis')
+this line shows the title in the stream lit
+st.subheader('Original dataset')
+the sub header places original data set below title
+
+
+st.subheader("After handling missing values")
+df['Age'].fillna('M',in place = True) //this line selects the age column from the data frame and respaces by "M" in the original data set
+df['Qty'].fillna(np.min(df['Gender']),in place=False)//this line selects the "Qty"column from the data frame and respaces by "Gender" in the original data set
+
+st.write(df)// writes the content of data frame
+st.write(df.shape)//it returns the data frame in tuple form
+
+st.subheader('Bar Chart Example')
+x_column = st.selectbox('Select X-axis column', df.columns,index=2)//code allows the user to select a column from the Data Frame to be used as the X-axis for a chart, with the third column set as the default selection.
+
+if x_column == 0:
+    St.error('Please select different columns for X and Y axis.')// this line throws an error if the index is empty or zero
+
+else:
+    st.subheader('Bar Chart')// helps to plot a bar chart
+    st.bar_chart(df[x_column].head(10),color='#669999')// the head function prints the first 10 rows and the color function fill the color specified here
+
+
+    st.subheader('Line Chart')//helps to plot a  chart
+    st.line_chart(df[x_column].head(60))//the head function prints the first 60 rows
+
+
+    st.subheader('Scatter Plot')//helps to plot a Scatter chart
+    st.scatter_chart(df[x_column].head(60))//the head function prints the first 60 rows
+
+
+    st. area chart(df[x_column].head(60))//helps to plot a area chart the head function prints the first 60 rows
+
+
+ # pie chart using matplotlib
+ st.subheader("Pie chart using matplotlib")
+    plt.figure(figsize=[6,6]) //figsize function creates the blank screen on which we plot a pie chart
+    plt.pie(df['Age Group'].value_counts().values, autoptc='%1.1f%%',labels=df['Age Group'].value_counts().index, colors=['#669999','#FF6633','#666666'])// the values counts function counts the value from age group column The autopct parameter in Matplotlib's pie() function allows you to display numerical values on the pie chart. It takes a string or function that specifies how the values should be formatted
+    st.pyplot(plt)// this plots the pie chart
+
+# barh
+    st.subheader("barh chart")
+    plt.figure(figsize=[10,10])
+    plt.barh(df['Size'].value_counts().index, df['Size'].value_counts().values,color=('#669999','#FF9933'))//barh displays the bars in the bar graph in the horizontal manner
+
+
+
+# plt.title('this is a bar graph',loc='right')
+    plt.title('this is a bar graph') // this is the  title
+    plt.xlabel('count of clothes ')// this msg will be shown in the x label
+    plt.ylabel('size of clothes')//this msg will be shown in the y label
+    plt. Grid()// it shows the grid lines in the graph
+
+
+
+
